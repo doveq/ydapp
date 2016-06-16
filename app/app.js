@@ -18,6 +18,10 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 
+import configureStore from './redux/stores'
+
+const store = configureStore();
+
 class ydapp extends Component
 {
     constructor(props)
@@ -81,12 +85,14 @@ class ydapp extends Component
     render()
     {
         return (
-            <Navigator
-                initialRoute={{name:'startPage'}}
-                configureScene={this.routeConfigureScene}
-                renderScene={this.routeMap.bind(this)}
-                ref={nav => { this.navigator = nav; }}
-            />
+            <Provider store={store}>
+                <Navigator
+                    initialRoute={{name:'startPage'}}
+                    configureScene={this.routeConfigureScene}
+                    renderScene={this.routeMap.bind(this)}
+                    ref={nav => { this.navigator = nav; }}
+                />
+            </Provider>
         );
     }
 

@@ -1,5 +1,5 @@
 /**
- * redux 动作处理
+ * 统一处理 redux 动作处理
  * Created by ql on 2016/6/15.
  */
 
@@ -9,11 +9,11 @@ import {
     Alert,
 } from 'react-native';
 
-import * as TYPES from './configs/types';
-import * as CONFIGS from './configs/configs';
+import * as TYPES from './../configs/types';
+import * as CONFIGS from './../configs/configs';
 
 /**
- *  获取文章列表数据
+ *  根据接口地址获取文章列表数据
  *  var int page 显示页数
  */
 export function getArticleList(url, page = 1)
@@ -21,8 +21,8 @@ export function getArticleList(url, page = 1)
     return (dispatch, getState) => {
         dispatch({'type': TYPES.ARTICLE_LIST_DOING});
 
-        url = url + '&page=' + page;
-        fetch(url)
+        let furl = url + '&page=' + page;
+        fetch(furl)
             .then((response) => response.json())
             .then((data) => {
                 let state = getState();
@@ -40,7 +40,7 @@ export function getArticleList(url, page = 1)
                 //    posts = this.state.listData.concat(posts);
                 //}
 
-                dispatch({'type': TYPES.ARTICLE_LIST_OK, 'data': posts, 'isMore': isMore});
+                dispatch({'type': TYPES.ARTICLE_LIST_OK, 'data': posts, 'isMore': isMore, 'url': url});
             })
             .catch((error) => {
                 dispatch({'type': TYPES.ARTICLE_LIST_ERROR});
