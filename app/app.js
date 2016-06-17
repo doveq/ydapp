@@ -14,15 +14,15 @@ import {
   ToastAndroid,
 } from 'react-native';
 
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk';
+// 载入各个页面设置路由
+import StartPage from "./startPage";
+import MainPage from "./mainPage";
+//import ArchivesPage from "./archivesPage";
+//import RegisterPage from "./registerPage";
+//import LoginPage from "./loginPage";
+//import CommentPage from "./commentPage";
 
-import configureStore from './redux/stores'
-
-const store = configureStore();
-
-class ydapp extends Component
+export default class app extends Component
 {
     constructor(props)
     {
@@ -72,7 +72,34 @@ class ydapp extends Component
     // 根据路由跳转到不同页面
     routeMap(route, navigator)
     {
-        console.log(route.name);
+        // 启动图页
+        if (route.name == 'startPage') {
+            return <StartPage {...route.params} navigator={navigator} />
+        }
+
+        // 框架页
+        if (route.name == 'mainPage') {
+            return <MainPage {...route.params} navigator={navigator} />
+        }
+
+        /*
+        // 内容详情页
+        if (route.name == 'archivesPage') {
+            return <ArchivesPage {...route.params} navigator={navigator} />
+        }
+
+        if (route.name == 'registerPage') {
+            return <RegisterPage {...route.params} navigator={navigator} />
+        }
+
+        if (route.name == 'loginPage') {
+            return <LoginPage {...route.params} navigator={navigator} />
+        }
+
+        if (route.name == 'commentPage') {
+            return <CommentPage {...route.params} navigator={navigator} />
+        }
+        */
     }
 
     // 设置页面跳转动画
@@ -85,17 +112,15 @@ class ydapp extends Component
     render()
     {
         return (
-            <Provider store={store}>
-                <Navigator
-                    initialRoute={{name:'startPage'}}
-                    configureScene={this.routeConfigureScene}
-                    renderScene={this.routeMap.bind(this)}
-                    ref={nav => { this.navigator = nav; }}
-                />
-            </Provider>
+            <Navigator
+                initialRoute={{name:'startPage'}}
+                configureScene={this.routeConfigureScene}
+                renderScene={this.routeMap.bind(this)}
+                ref={nav => { this.navigator = nav; }}
+            />
         );
     }
 
 }//:~
 
-AppRegistry.registerComponent('ydapp', () => ydapp);
+

@@ -8,10 +8,10 @@
 import {combineReducers} from 'redux';
 import * as TYPES from './../configs/types';
 
-const rootReducer = combineReducers({
-    articleList,
-});
-
+const initialState = {
+    loading: false,
+    loaded: false,
+}
 
 export function articleList(state = initialState, action)
 {
@@ -34,5 +34,10 @@ export function articleList(state = initialState, action)
             return state;
     }
 }
+
+
+const rootReducer = combineReducers({
+    articleList,
+});
 
 export default rootReducer;

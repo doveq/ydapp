@@ -22,6 +22,8 @@ import {
 
 import ViewPager from 'react-native-viewpager';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {connect} from 'react-redux';
+import * as Actions from './redux/actions'
 
 // 屏幕宽度
 var DEVICE_WIDTH = Dimensions.get('window').width;
@@ -35,7 +37,7 @@ var vpds = new ViewPager.DataSource({
     pageHasChanged: (p1, p2) => p1 !== p2,
 });
 
-export default class ListPage extends Component
+class ListPage extends Component
 {
 
     constructor(props)
@@ -47,6 +49,9 @@ export default class ListPage extends Component
             listData: null,
             isLoading: false,
         };
+
+        // redux 调用方法
+        this.dispatch = props.dispatch;
 
         // api接口地址
         this.apiUrl = this.props.apiUrl;
@@ -60,9 +65,17 @@ export default class ListPage extends Component
 
     componentDidMount()
     {
-        this.getListData();
+        //this.getListData();
     }
 
+
+    //每次接受新的props触发
+    componentWillReceiveProps(nextProps)
+    {
+        console.log('执行componentWillReceiveProps',nextProps);
+    }
+
+    /*
     componentWillReceiveProps()
     {
         // 组件属性刷新时，如果访问的URL是以前的地址则不下载数据
@@ -70,10 +83,9 @@ export default class ListPage extends Component
             this.preUrl = this.props.apiUrl;
             this.apiUrl = this.props.apiUrl;
 
-            /*
-                设置listData: null,是解决访问其他分类时会跟上一个分类数据叠加的问题，
-                因为fetch中使用了this.state.listData.concat(data) 数据合并
-            */
+
+            //设置listData: null,是解决访问其他分类时会跟上一个分类数据叠加的问题，
+            //因为fetch中使用了this.state.listData.concat(data) 数据合并
             this.setState({
                 loaded: false,
                 listData: null,
@@ -84,6 +96,7 @@ export default class ListPage extends Component
             this.getListData();
         }
     }
+    */
 
     // ListView组件下拉到最后后调用
     onEndReached()
@@ -192,7 +205,7 @@ export default class ListPage extends Component
                     key={'list' + this.props.id}
                     dataSource={ds.cloneWithRows(this.state.listData)} // 渲染的数据聚合
                     renderRow={this.renderList.bind(this)}
-                    keyboardDismissMode={'none', 'ondrag','interactive'}
+                    keyboardDismissMode={'none','ondrag','interactive'}
                     keyboardShouldPersistTaps={true}
                     initialListSize={5}
                     onEndReached={this.onEndReached.bind(this)}
@@ -203,6 +216,14 @@ export default class ListPage extends Component
     }
 
 }//:~
+
+// redux 传递数据
+function mapStateToProps(state) {
+    return {
+        state
+    }
+}
+export default connect(mapStateToProps)(ListPage);
 
 var styles = StyleSheet.create({
   container: {

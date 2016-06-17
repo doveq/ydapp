@@ -62,7 +62,8 @@ export default class MainPage extends Component
     // 获取分
     render()
     {
-        const menu = <MenuPage indexAPIData={INDEX_API_DATA} onItemSelected={this.onMenuItemSelected} navigator={this.navigator} closeDrawer={this.closeDrawer} />;
+        //const menu = <MenuPage indexAPIData={INDEX_API_DATA} onItemSelected={this.onMenuItemSelected} navigator={this.navigator} closeDrawer={this.closeDrawer} />;
+        let menu = <Text>菜单...</Text>
 
         let show = <ListPage key={this.state.selectedUrl} apiUrl={this.state.selectedUrl} navigator={this.navigator} />
 
