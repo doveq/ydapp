@@ -68,13 +68,6 @@ class ListPage extends Component
         //this.getListData();
     }
 
-
-    //每次接受新的props触发
-    componentWillReceiveProps(nextProps)
-    {
-        console.log('执行componentWillReceiveProps',nextProps);
-    }
-
     /*
     componentWillReceiveProps()
     {

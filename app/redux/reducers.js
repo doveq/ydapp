@@ -6,12 +6,9 @@
 'use strict';
 
 import {combineReducers} from 'redux';
-import * as TYPES from './../configs/types';
+import * as TYPES from '../configs/types';
 
-const initialState = {
-    loading: false,
-    loaded: false,
-}
+const initialState = {}
 
 export function articleList(state = initialState, action)
 {

@@ -102,30 +102,6 @@ export default class MainPage extends Component
               </Drawer>
         );
 
-        /*
-        return (
-            <SideMenu
-                menu={menu}
-                isOpen={this.state.isOpen}
-                onChange={(isOpen) => this.updateMenuState(isOpen)}
-                openMenuOffset={200}
-                bounceBackOnOverdraw={false}
-                disableGestures={false} >
-
-                <View style={styles.container}>
-                    <View style={styles.topnav}>
-                        <Icon name="ellipsis-v" size={24} color="#fff" onPress={() => this.toggle()} style={styles.navleft} />
-                        <Text style={styles.navtit}>{this.state.selectedName}</Text>
-                    </View>
-
-                    <StatusBar hidden={false} backgroundColor="#0AAD5E" barStyle="light-content" />
-
-                    {show}
-
-                </View>
-            </SideMenu>
-        );
-        */
     }
 }
 

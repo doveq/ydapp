@@ -15,6 +15,9 @@ import {
   StatusBar,
 } from 'react-native';
 
+// 获取手机的宽高
+const {height, width} = Dimensions.get('window');
+
 export default class StartPage extends Component
 {
     constructor(props)
@@ -43,8 +46,6 @@ export default class StartPage extends Component
 
     render()
     {
-        // 获取手机的宽高
-        let {height, width} = Dimensions.get('window');
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />

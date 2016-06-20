@@ -9,8 +9,8 @@ import {
     Alert,
 } from 'react-native';
 
-import * as TYPES from './../configs/types';
-import * as CONFIGS from './../configs/configs';
+import * as TYPES from '../configs/types';
+import * as CONFIGS from '../configs/configs';
 
 /**
  *  根据接口地址获取文章列表数据
@@ -26,7 +26,7 @@ export function getArticleList(url, page = 1)
             .then((response) => response.json())
             .then((data) => {
                 let state = getState();
-                console.log(state);
+                //console.log(state);
 
                 let isMore = true;
                 if (data.pages <= page) {

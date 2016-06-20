@@ -22,7 +22,7 @@ import MainPage from "./mainPage";
 //import LoginPage from "./loginPage";
 //import CommentPage from "./commentPage";
 
-export default class app extends Component
+export default class App extends Component
 {
     constructor(props)
     {
@@ -82,24 +82,23 @@ export default class app extends Component
             return <MainPage {...route.params} navigator={navigator} />
         }
 
-        /*
-        // 内容详情页
-        if (route.name == 'archivesPage') {
-            return <ArchivesPage {...route.params} navigator={navigator} />
-        }
+        //// 内容详情页
+        //if (route.name == 'archivesPage') {
+        //    return <ArchivesPage {...route.params} navigator={navigator} />
+        //}
+        //
+        //if (route.name == 'registerPage') {
+        //    return <RegisterPage {...route.params} navigator={navigator} />
+        //}
+        //
+        //if (route.name == 'loginPage') {
+        //    return <LoginPage {...route.params} navigator={navigator} />
+        //}
+        //
+        //if (route.name == 'commentPage') {
+        //    return <CommentPage {...route.params} navigator={navigator} />
+        //}
 
-        if (route.name == 'registerPage') {
-            return <RegisterPage {...route.params} navigator={navigator} />
-        }
-
-        if (route.name == 'loginPage') {
-            return <LoginPage {...route.params} navigator={navigator} />
-        }
-
-        if (route.name == 'commentPage') {
-            return <CommentPage {...route.params} navigator={navigator} />
-        }
-        */
     }
 
     // 设置页面跳转动画
