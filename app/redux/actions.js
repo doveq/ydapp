@@ -19,7 +19,7 @@ import * as CONFIGS from '../configs/configs';
 export function getArticleList(url, page = 1)
 {
     return (dispatch, getState) => {
-        dispatch({'type': TYPES.ARTICLE_LIST_DOING});
+        dispatch({'type': TYPES.ARTICLE_LIST_DOING, 'url': url});
 
         let furl = url + '&page=' + page;
         fetch(furl)
@@ -28,9 +28,9 @@ export function getArticleList(url, page = 1)
                 let state = getState();
                 //console.log(state);
 
-                let isMore = true;
-                if (data.pages <= page) {
-                    isMore = false;
+                let isMore = false;
+                if (data.pages > page) {
+                    isMore = true;
                 }
 
                 let posts = data.posts;
@@ -43,7 +43,7 @@ export function getArticleList(url, page = 1)
                 dispatch({'type': TYPES.ARTICLE_LIST_OK, 'data': posts, 'isMore': isMore, 'url': url});
             })
             .catch((error) => {
-                dispatch({'type': TYPES.ARTICLE_LIST_ERROR});
+                dispatch({'type': TYPES.ARTICLE_LIST_ERROR, 'url': url});
                 Alert.alert('', error.message)
             });
     }

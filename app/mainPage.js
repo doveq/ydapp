@@ -17,13 +17,9 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Drawer from 'react-native-drawer'
 
+import * as CONFIGS from "./configs/configs";
 import ListPage from "./listPage";
 import MenuPage from "./menuPage";
-
-// 默认首页api接口地址
-const INDEX_API_DATA = {name: '能源评论', url: 'http://112.124.18.75/api/get_recent_posts/?exclude=content,excerpt,comments,attachments'};
-
-const window = Dimensions.get('window');
 
 export default class MainPage extends Component
 {
@@ -32,8 +28,8 @@ export default class MainPage extends Component
         super(props);
         this.navigator = this.props.navigator;
         this.state = {
-            selectedName: INDEX_API_DATA.name,
-            selectedUrl: INDEX_API_DATA.url,
+            selectedName: CONFIGS.INDEX_LIST_API.name,
+            selectedUrl: CONFIGS.INDEX_LIST_API.url,
             drawerDisabled: false,
         };
 
@@ -62,8 +58,7 @@ export default class MainPage extends Component
     // 获取分
     render()
     {
-        //const menu = <MenuPage indexAPIData={INDEX_API_DATA} onItemSelected={this.onMenuItemSelected} navigator={this.navigator} closeDrawer={this.closeDrawer} />;
-        let menu = <Text>菜单...</Text>
+        const menu = <MenuPage indexAPIData={CONFIGS.INDEX_LIST_API} onItemSelected={this.onMenuItemSelected} navigator={this.navigator} closeDrawer={this.closeDrawer} />;
 
         let show = <ListPage key={this.state.selectedUrl} apiUrl={this.state.selectedUrl} navigator={this.navigator} />
 

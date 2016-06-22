@@ -17,10 +17,10 @@ import {
 // 载入各个页面设置路由
 import StartPage from "./startPage";
 import MainPage from "./mainPage";
-//import ArchivesPage from "./archivesPage";
-//import RegisterPage from "./registerPage";
-//import LoginPage from "./loginPage";
-//import CommentPage from "./commentPage";
+import ArchivesPage from "./archivesPage";
+import RegisterPage from "./registerPage";
+import LoginPage from "./loginPage";
+import CommentPage from "./commentPage";
 
 export default class App extends Component
 {
@@ -82,22 +82,22 @@ export default class App extends Component
             return <MainPage {...route.params} navigator={navigator} />
         }
 
-        //// 内容详情页
-        //if (route.name == 'archivesPage') {
-        //    return <ArchivesPage {...route.params} navigator={navigator} />
-        //}
-        //
-        //if (route.name == 'registerPage') {
-        //    return <RegisterPage {...route.params} navigator={navigator} />
-        //}
-        //
-        //if (route.name == 'loginPage') {
-        //    return <LoginPage {...route.params} navigator={navigator} />
-        //}
-        //
-        //if (route.name == 'commentPage') {
-        //    return <CommentPage {...route.params} navigator={navigator} />
-        //}
+        // 内容详情页
+        if (route.name == 'archivesPage') {
+            return <ArchivesPage {...route.params} navigator={navigator} />
+        }
+
+        if (route.name == 'registerPage') {
+            return <RegisterPage {...route.params} navigator={navigator} />
+        }
+
+        if (route.name == 'loginPage') {
+            return <LoginPage {...route.params} navigator={navigator} />
+        }
+
+        if (route.name == 'commentPage') {
+            return <CommentPage {...route.params} navigator={navigator} />
+        }
 
     }
 
@@ -112,7 +112,7 @@ export default class App extends Component
     {
         return (
             <Navigator
-                initialRoute={{name:'startPage'}}
+                initialRoute={{name:'mainPage'}}
                 configureScene={this.routeConfigureScene}
                 renderScene={this.routeMap.bind(this)}
                 ref={nav => { this.navigator = nav; }}

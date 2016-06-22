@@ -22,8 +22,6 @@ import {
 
 import ViewPager from 'react-native-viewpager';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {connect} from 'react-redux';
-import * as Actions from './redux/actions'
 
 // 屏幕宽度
 var DEVICE_WIDTH = Dimensions.get('window').width;
@@ -33,11 +31,7 @@ var ds = new ListView.DataSource({
     sectionHeaderHasChanged: (s1, s2) => s1 !== s2
 });
 
-var vpds = new ViewPager.DataSource({
-    pageHasChanged: (p1, p2) => p1 !== p2,
-});
-
-class ListPage extends Component
+export default class ListPage extends Component
 {
 
     constructor(props)
@@ -49,9 +43,6 @@ class ListPage extends Component
             listData: null,
             isLoading: false,
         };
-
-        // redux 调用方法
-        this.dispatch = props.dispatch;
 
         // api接口地址
         this.apiUrl = this.props.apiUrl;
@@ -65,10 +56,9 @@ class ListPage extends Component
 
     componentDidMount()
     {
-        //this.getListData();
+        this.getListData();
     }
 
-    /*
     componentWillReceiveProps()
     {
         // 组件属性刷新时，如果访问的URL是以前的地址则不下载数据
@@ -76,9 +66,10 @@ class ListPage extends Component
             this.preUrl = this.props.apiUrl;
             this.apiUrl = this.props.apiUrl;
 
-
-            //设置listData: null,是解决访问其他分类时会跟上一个分类数据叠加的问题，
-            //因为fetch中使用了this.state.listData.concat(data) 数据合并
+            /*
+                设置listData: null,是解决访问其他分类时会跟上一个分类数据叠加的问题，
+                因为fetch中使用了this.state.listData.concat(data) 数据合并
+            */
             this.setState({
                 loaded: false,
                 listData: null,
@@ -89,7 +80,12 @@ class ListPage extends Component
             this.getListData();
         }
     }
-    */
+
+    // 性能优化，返回true才会调用 render() 重绘UI
+    shouldComponentUpdate (nextProps = {}, nextState = {})
+    {
+        return true;
+    }
 
     // ListView组件下拉到最后后调用
     onEndReached()
@@ -131,7 +127,7 @@ class ListPage extends Component
                 });
             })
             .catch((error) => {
-                console.warn(error);
+                Alert.alert('', error.message);
             });
     }
 
@@ -198,25 +194,18 @@ class ListPage extends Component
                     key={'list' + this.props.id}
                     dataSource={ds.cloneWithRows(this.state.listData)} // 渲染的数据聚合
                     renderRow={this.renderList.bind(this)}
-                    keyboardDismissMode={'none','ondrag','interactive'}
+                    keyboardDismissMode={'none', 'ondrag','interactive'}
                     keyboardShouldPersistTaps={true}
                     initialListSize={5}
                     onEndReached={this.onEndReached.bind(this)}
                     onEndReachedThreshold={30}
+                    removeClippedSubviews={true}
                 />
             );
         }
     }
 
 }//:~
-
-// redux 传递数据
-function mapStateToProps(state) {
-    return {
-        state
-    }
-}
-export default connect(mapStateToProps)(ListPage);
 
 var styles = StyleSheet.create({
   container: {

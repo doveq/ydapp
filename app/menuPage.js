@@ -48,6 +48,12 @@ export default class MenuPage extends Component
         this.auth();
     }
 
+    // 性能优化，返回true才会调用 render() 重绘UI
+    shouldComponentUpdate (nextProps = {}, nextState = {})
+    {
+        return true;
+    }
+
     // 获取顶部菜单栏数据
     async getNavData()
     {

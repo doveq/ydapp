@@ -14,19 +14,14 @@ export function articleList(state = initialState, action)
 {
     switch (action.type) {
         case TYPES.ARTICLE_LIST_DOING:
-            return Object.assign({}, state, {
-                loading: true
-            });
+            state[action.url] = {...state[action.url], loading: true};
+            return Object.assign({}, state);
         case TYPES.ARTICLE_LIST_OK:
-            let nv = {loading: false, loaded: true,};
-            nv[action.url] = {data: action.data, isMore: action.isMore};
-
-            return Object.assign({}, state, nv);
+            state[action.url] = {...state[action.url], loading: false, loaded: true, data: action.data, isMore: action.isMore};
+            return Object.assign({}, state);
         case TYPES.ARTICLE_LIST_ERROR:
-            return Object.assign({}, state, {
-                loading: false,
-                loaded: true,
-            });
+            state[action.url] = {...state[action.url], loading: false, loaded: true,};
+            return Object.assign({}, state);
         default:
             return state;
     }

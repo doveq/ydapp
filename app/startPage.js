@@ -42,8 +42,6 @@ export default class StartPage extends Component
         ).start( () => this.props.navigator.push({name:'mainPage'}) );    // 开始执行动画,并且执行完动画后跳转页面
     }
 
-    // 获取分
-
     render()
     {
         return (
