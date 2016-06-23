@@ -112,7 +112,7 @@ export default class App extends Component
     {
         return (
             <Navigator
-                initialRoute={{name:'startPage'}}
+                initialRoute={{name:'mainPage'}}
                 configureScene={this.routeConfigureScene}
                 renderScene={this.routeMap.bind(this)}
                 ref={nav => { this.navigator = nav; }}
