@@ -12,6 +12,7 @@ import {
   Image,
   Dimensions,
   StatusBar,
+  Platform,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -62,6 +63,11 @@ export default class MainPage extends Component
 
         let show = <ListPage key={this.state.selectedUrl} apiUrl={this.state.selectedUrl} navigator={this.navigator} />
 
+        let sbar = <StatusBar hidden={false} backgroundColor="#0AAD5E" barStyle="light-content" />
+        if (Platform.OS === 'ios') {
+          sbar = <StatusBar hidden={true} backgroundColor="#0AAD5E" barStyle="light-content" />
+        }
+
         return (
             <Drawer
                 type="static"
@@ -83,12 +89,13 @@ export default class MainPage extends Component
             >
 
                 <View style={styles.container}>
+
+                    {sbar}
+
                     <View style={styles.topnav}>
                         <Icon name="ellipsis-v" size={24} color="#fff" onPress={this.openDrawer} style={styles.navright} />
                         <Text style={styles.navtit}>{this.state.selectedName}</Text>
                     </View>
-
-                    <StatusBar hidden={false} backgroundColor="#0AAD5E" barStyle="light-content" />
 
                     {show}
 
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
   },
   topnav: {
       backgroundColor: '#0AAD5E',
-      height:48,
+      height: 48,
       justifyContent: 'center',
       alignItems: 'center',
   },

@@ -84,9 +84,15 @@ export default class ArchivesPage extends Component
         // 正则替换图片，解决图片超出显示的问题
         html = html.replace(/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\1[^>]*?\/?\s*>/g, '<img src="$2" style="max-width:100%;">');
 
+        let sbar = <StatusBar hidden={false} backgroundColor="#0AAD5E" barStyle="light-content" />
+        if (Platform.OS === 'ios') {
+          sbar = <StatusBar hidden={true} backgroundColor="#0AAD5E" barStyle="light-content" />
+        }
+
         return (
             <View style={styles.container}>
-                <StatusBar hidden={false} backgroundColor="#0AAD5E" barStyle="light-content" />
+                {sbar}
+
                 <View style={styles.topnav}>
                     <Icon name="chevron-left" size={24} color="#fff" onPress={() => this.navigator.pop()} style={styles.navleft} />
                     <Icon name="commenting" size={24} color="#fff" style={styles.navright} onPress={() => this.navigator.push({name:'commentPage',params:{postId:this.props.id} })} />

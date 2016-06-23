@@ -105,7 +105,7 @@ export default class ListPage extends Component
     async getListData()
     {
         let url = this.apiUrl + '&page=' + this.page;
-
+        
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -229,6 +229,7 @@ var styles = StyleSheet.create({
       right:15,
       fontSize: 18,
       fontWeight: "600",
+      backgroundColor: 'transparent',
   },
   strItem: {
       borderStyle: 'solid',
