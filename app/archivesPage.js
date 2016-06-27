@@ -13,7 +13,8 @@ import {
   Dimensions,
   StatusBar,
   WebView,
-    Platform,
+  Platform,
+  Alert,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -48,13 +49,14 @@ export default class ArchivesPage extends Component
         fetch(POST_API_URL + this.props.id)
             .then((response) => response.json())
             .then((data) => {
+
                 this.setState({
                     loaded: true,
                     data: data.post,
                 });
             })
             .catch((error) => {
-                console.warn(error);
+                Alert.alert('', error.message);
             });
     }
 
@@ -75,15 +77,15 @@ export default class ArchivesPage extends Component
             topimg = '<img src="' + data.thumbnail_images.full.url + '" style="max-width:100%;">';
 
         let html = '<!DOCTYPE html><html><head>'
-                    +'<style>html,body{padding:0,margin:0}</style>'
+                    +'<style>html,body{padding:0,margin:0} p{font-size:2.5em;}</style>'
                     +'</head><body>'
                     + topimg
-                    + '<div style="padding:20px 0;font-weight:bold;font-size:20px;">'+ data.title +'</div>'
+                    + '<div style="padding:20px 0;font-weight:bold;font-size:4em;">'+ data.title +'</div>'
                     + data.content
                     + '</body></html>';
 
         // 正则替换图片，解决图片超出显示的问题
-        html = html.replace(/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\1[^>]*?\/?\s*>/g, '<img src="$2" style="max-width:100%;">');
+        html = html.replace(/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\1[^>]*?\/?\s*>/g, '<img src="$2" style="width:100%;">');
 
         let sbar = <StatusBar hidden={false} backgroundColor="#0AAD5E" barStyle="light-content" />
         if (Platform.OS === 'ios') {
@@ -107,7 +109,6 @@ export default class ArchivesPage extends Component
                   javaScriptEnabled={true}
                   domStorageEnabled={true}
                   decelerationRate="normal"
-                  startInLoadingState={true}
                   scalesPageToFit={true}
                 />
             </View>

@@ -214,7 +214,7 @@ export default class CommentPage extends Component
 
                 <View style={{padding:10,marginBottom:20,}}>
                     <TextInput
-                        style={{}}
+                        style={{height:40,borderColor: 'gray', borderBottomWidth: 1}}
                         placeholder='填写评论'
                         onChangeText={(text) => this.setState({comment: text})}
                         value={this.state.comment}
